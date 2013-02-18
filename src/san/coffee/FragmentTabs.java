@@ -3,6 +3,7 @@ package san.coffee;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 
@@ -17,6 +18,7 @@ public class FragmentTabs extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+    	Log.d("FragmentTabs", "onCreate");
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.fragment_tabs);
