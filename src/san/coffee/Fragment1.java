@@ -31,6 +31,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class Fragment1 extends ListFragment {
 	private LinkedList<String> mListItems;
+	private PullToRefreshListView mPullToRefreshListView;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		Log.d("Fragment1", "onCreate");
@@ -43,49 +44,12 @@ public class Fragment1 extends ListFragment {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		Log.d("Fragment1", "onCreateView");
-		/*
-        Context ctx = getApplicationContext();
-		Resources res = ctx.getResources();
-
-		String[] options = res.getStringArray(R.array.country_names);
-		TypedArray icons = res.obtainTypedArray(R.array.country_icons);
-		
-		setListAdapter(new ImageAndTextAdapter(ctx, R.layout.main_list_item,
-				options, icons));
-		
-		String[] str = {"123", "345"}; 
-		PullToRefreshListView listView = new PullToRefreshListView(getActivity());
-		listView.setAdapter(new ImageAndTextAdapter(ctx, R.layout.main_list_item, {"string ", "345"} , R.layout.countries));
-		return listView;
-		*/
-		/*
-		View view = inflater.inflate(R.layout.pull_to_refresh, container, false);
-		
-		
-		String[] data = new String[0];	// empty list!
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data);
-        final ListView myList = (ListView) view.findViewById(android.R.id.list);
-        myList.setAdapter(adapter);
-        myList.setFastScrollEnabled(true);
-        myList.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, 
-					int pos, long id) {
-			}
-		});
-        myList.setTextFilterEnabled(true);
-        Drawable d = new GradientDrawable(
-        		GradientDrawable.Orientation.BOTTOM_TOP,
-        		new int[]{0x00ff00, 0x008888, 0x0000ff});
-
-		return view;
-		*/
-		
 		View view =  inflater.inflate(R.layout.pull_to_refresh, container, false);
 		
         // Set a listener to be invoked when the list should be refreshed.
 
-        ((PullToRefreshListView) view.findViewById(android.R.id.list)).setOnRefreshListener(new OnRefreshListener() {
+		mPullToRefreshListView = ((PullToRefreshListView) view.findViewById(android.R.id.list));
+		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
                 // Do work to refresh the list here.
@@ -101,15 +65,6 @@ public class Fragment1 extends ListFragment {
         ((PullToRefreshListView) view.findViewById(android.R.id.list)).setAdapter(adapter);
         
         return view;
-        /*
-		PullToRefreshListView listView = new PullToRefreshListView(getActivity());
-		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, mListItems);
-        mListItems = new LinkedList<String>();
-        mListItems.addAll(Arrays.asList(mStrings));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, mListItems);
-		listView.setAdapter(adapter);
-		return listView;
-		*/
 		
 	}
 	
@@ -132,7 +87,7 @@ public class Fragment1 extends ListFragment {
 
             // Call onRefreshComplete when the list has been refreshed.
             //((PullToRefreshListView) view.findViewById(R.id.pulltorefreshlist)).onRefreshComplete();
-            ((PullToRefreshListView) getListView()).onRefreshComplete();
+            mPullToRefreshListView.onRefreshComplete();
 
             super.onPostExecute(result);
         }
