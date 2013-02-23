@@ -4,5 +4,8 @@
     <string name="app_name">SanCoffee</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-
+    <string name="facebook_login">Facebook Login</string>
+    <string name="san_login">森Account Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="dont_login">Don\'t Login</string>
 </resources>

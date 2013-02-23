@@ -1,5 +1,7 @@
 package san.coffee;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
@@ -21,33 +23,44 @@ public class FragmentTabs extends FragmentActivity {
     	Log.d("FragmentTabs", "onCreate");
         super.onCreate(savedInstanceState);
         
-        setContentView(R.layout.fragment_tabs);
-        mTabHost = (TabHost)findViewById(android.R.id.tabhost);
-        mTabHost.setup();
-        
-        mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
-        
-        mTabHost.setCurrentTab(0);
-        mTabManager.addTab(mTabHost.newTabSpec("Fragment1").setIndicator("News"),
-        		Fragment1.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("Fragment2").setIndicator("Scan"),
-        		Fragment2.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("Fragment3").setIndicator("My"),
-        		Fragment3.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("Fragment4").setIndicator("Setup"),
-        		Fragment4.class, null);
-
-      
-		   
-        DisplayMetrics dm = new DisplayMetrics();   
-        getWindowManager().getDefaultDisplay().getMetrics(dm); //先取得螢幕解析度  
-        int screenWidth = dm.widthPixels;   //取得螢幕的寬
-           
-           
-        TabWidget tabWidget = mTabHost.getTabWidget();   //取得tab的物件
-        int count = tabWidget.getChildCount();   //取得tab的分頁有幾個
-        for (int i = 0; i < count; i++) {   
-            tabWidget.getChildTabViewAt(i).setMinimumWidth((screenWidth / count)+8);//設定每一個分頁最小的寬度   
-        }   
+        SharedPreferences prefs = this.getSharedPreferences( "SanAppFrefs", 0);
+		if (prefs.getBoolean("firstRun", true)){
+			SharedPreferences.Editor edit = prefs.edit();
+			edit.putBoolean("firstRun", true);
+			edit.commit();
+			
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);			
+		}
+		else{
+            setContentView(R.layout.fragment_tabs);
+	        mTabHost = (TabHost)findViewById(android.R.id.tabhost);
+	        mTabHost.setup();
+	        
+	        mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
+	        
+	        mTabHost.setCurrentTab(0);
+	        mTabManager.addTab(mTabHost.newTabSpec("Fragment1").setIndicator("News"),
+	        		Fragment1.class, null);
+	        mTabManager.addTab(mTabHost.newTabSpec("Fragment2").setIndicator("Scan"),
+	        		Fragment2.class, null);
+	        mTabManager.addTab(mTabHost.newTabSpec("Fragment3").setIndicator("My"),
+	        		Fragment3.class, null);
+	        mTabManager.addTab(mTabHost.newTabSpec("Fragment4").setIndicator("Setup"),
+	        		Fragment4.class, null);
+	
+	      
+			   
+	        DisplayMetrics dm = new DisplayMetrics();   
+	        getWindowManager().getDefaultDisplay().getMetrics(dm); //先取得螢幕解析度  
+	        int screenWidth = dm.widthPixels;   //取得螢幕的寬
+	           
+	           
+	        TabWidget tabWidget = mTabHost.getTabWidget();   //取得tab的物件
+	        int count = tabWidget.getChildCount();   //取得tab的分頁有幾個
+	        for (int i = 0; i < count; i++) {   
+	            tabWidget.getChildTabViewAt(i).setMinimumWidth((screenWidth / count)+8);//設定每一個分頁最小的寬度   
+	        }   
+		}
     }
 }
