@@ -1,8 +1,10 @@
-package san.coffee;
+package com.withtron.sancoffee;
 
 
 import java.util.Arrays;
 import java.util.LinkedList;
+
+import com.withtron.sancoffee.R;
 
 import com.markupartist.android.widget.PullToRefreshListView;
 import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;

@@ -1,6 +1,7 @@
-package san.coffee;
+package com.withtron.sancoffee;
 
 
+import com.withtron.sancoffee.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
