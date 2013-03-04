@@ -31,14 +31,16 @@ public class FragmentTabs extends FragmentActivity {
         mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
         
         mTabHost.setCurrentTab(0);
-        mTabManager.addTab(mTabHost.newTabSpec("Fragment1").setIndicator("News"),
-        		Fragment1.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("Fragment2").setIndicator("Scan"),
-        		Fragment2.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("Fragment3").setIndicator("My"),
-        		Fragment3.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("Fragment4").setIndicator("Setup"),
-        		Fragment4.class, null);
+        mTabManager.addTab(mTabHost.newTabSpec("NewsFragment").setIndicator("News"),
+        		NewsFragment.class, null);
+        mTabManager.addTab(mTabHost.newTabSpec("CookFragment").setIndicator("Cook"),
+        		CookFragment.class, null);
+        mTabManager.addTab(mTabHost.newTabSpec("ScanFragment").setIndicator("Scan"),
+        		ScanFragment.class, null);
+        mTabManager.addTab(mTabHost.newTabSpec("MyFragment").setIndicator("My"),
+        		MyFragment.class, null);
+        mTabManager.addTab(mTabHost.newTabSpec("SetupFragment").setIndicator("Setup"),
+        		SetupFragment.class, null);
 
       
 		   

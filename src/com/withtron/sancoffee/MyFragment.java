@@ -9,11 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Fragment4 extends Fragment {
+public class MyFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Log.d("Fragment4", "onCreate");
+		Log.d("MyFragment", "onCreate");
 		super.onCreate(savedInstanceState);
 	}
 
@@ -21,7 +21,7 @@ public class Fragment4 extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Log.d("Fragment4", "onCreateView");
+		Log.d("MyFragment", "onCreateView");
 		return inflater.inflate(R.layout.list, container, false);
 	}
 }

@@ -31,12 +31,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class Fragment1 extends ListFragment {
+public class NewsFragment extends ListFragment {
 	private LinkedList<String> mListItems;
 	private PullToRefreshListView mPullToRefreshListView;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Log.d("Fragment1", "onCreate");
+		Log.d("NewsFragment", "onCreate");
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 	}
@@ -45,7 +45,7 @@ public class Fragment1 extends ListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Log.d("Fragment1", "onCreateView");
+		Log.d("NewsFragment", "onCreateView");
 		View view =  inflater.inflate(R.layout.pull_to_refresh, container, false);
 		
         // Set a listener to be invoked when the list should be refreshed.
