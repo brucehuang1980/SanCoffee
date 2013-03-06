@@ -1,8 +1,24 @@
 package com.withtron.sancoffee;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import com.facebook.Session;
 import com.withtron.sancoffee.R;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
@@ -10,6 +26,7 @@ import android.util.Log;
 import android.view.Window;
 import android.widget.TabHost;
 import android.widget.TabWidget;
+import android.widget.TextView;
 
 /**
  * This demonstrates how you can implement switching between the tabs of a
@@ -45,17 +62,47 @@ public class FragmentTabs extends FragmentActivity {
         mTabManager.addTab(mTabHost.newTabSpec("SetupFragment").setIndicator(getString(R.string.setup_tab)),
         		SetupFragment.class, null);
 
-      
-		   
         DisplayMetrics dm = new DisplayMetrics();   
         getWindowManager().getDefaultDisplay().getMetrics(dm); //先取得螢幕解析度  
         int screenWidth = dm.widthPixels;   //取得螢幕的寬
-           
            
         TabWidget tabWidget = mTabHost.getTabWidget();   //取得tab的物件
         int count = tabWidget.getChildCount();   //取得tab的分頁有幾個
         for (int i = 0; i < count; i++) {   
             tabWidget.getChildTabViewAt(i).setMinimumWidth((screenWidth / count)+8);//設定每一個分頁最小的寬度   
         }   
+        
+        Session session = Session.getActiveSession();
+        String token = session.getAccessToken();
+        Log.d("facebook token = " + token, "FragmentTabs");
+        String url = "https://graph.facebook.com/me?fields=id,name&access_token=" + token;
+        Log.d("Query facebook user name, url = " + url, "FragmentTabs");
+    	new FragmentRequestTask().execute(url);
+    }
+    
+    public class FragmentRequestTask extends RequestTask{
+
+        @Override
+        protected void onPostExecute(String result) {
+        	super.onPostExecute(result);
+            //Do anything with response..
+            try {
+            	if (result == null){
+    				TextView text = (TextView)findViewById(R.id.fb_user_name);
+    				text.setText("None");
+            	}
+            	else{
+                	Log.d("FragmentRequestTask resutl = " + result, "FragmentRequestTask");
+    				JSONObject jObject = new JSONObject(result);
+    				String userName = jObject.getString("name");
+    				TextView text = (TextView)findViewById(R.id.fb_user_name);
+    				text.setText(userName);
+            	}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Log.d("Parse JSON fail", "FragmentRequestTask");
+			}
+        }
     }
 }

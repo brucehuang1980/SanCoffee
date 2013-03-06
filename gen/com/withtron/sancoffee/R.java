@@ -231,6 +231,7 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f04001a;
         public static final int dontlogin=0x7f040006;
         public static final int facebooklogin=0x7f040003;
+        public static final int fb_user_name=0x7f040023;
         public static final int large=0x7f040002;
         public static final int listView=0x7f04001d;
         public static final int menu_settings=0x7f040024;
@@ -247,7 +248,6 @@ containing a value of this type.
         public static final int search_box=0x7f040017;
         public static final int signup=0x7f040005;
         public static final int small=0x7f040000;
-        public static final int title=0x7f040023;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
