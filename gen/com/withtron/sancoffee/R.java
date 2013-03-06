@@ -206,7 +206,8 @@ containing a value of this type.
         public static final int ic_launcher=0x7f02001f;
         public static final int ic_pulltorefresh_arrow=0x7f020020;
         public static final int icon=0x7f020021;
-        public static final int pull_to_refresh_header_background=0x7f020022;
+        public static final int logo=0x7f020022;
+        public static final int pull_to_refresh_header_background=0x7f020023;
     }
     public static final class id {
         public static final int com_facebook_login_activity_progress_bar=0x7f040009;
@@ -232,7 +233,7 @@ containing a value of this type.
         public static final int facebooklogin=0x7f040003;
         public static final int large=0x7f040002;
         public static final int listView=0x7f04001d;
-        public static final int menu_settings=0x7f040023;
+        public static final int menu_settings=0x7f040024;
         public static final int normal=0x7f040001;
         public static final int picker_subtitle=0x7f040018;
         public static final int pull_to_refresh_header=0x7f04001e;
@@ -246,6 +247,7 @@ containing a value of this type.
         public static final int search_box=0x7f040017;
         public static final int signup=0x7f040005;
         public static final int small=0x7f040000;
+        public static final int title=0x7f040023;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
@@ -266,6 +268,7 @@ containing a value of this type.
         public static final int list=0x7f03000f;
         public static final int pull_to_refresh=0x7f030010;
         public static final int pull_to_refresh_header=0x7f030011;
+        public static final int titlebar=0x7f030012;
     }
     public static final class menu {
         public static final int activity_main=0x7f090000;
@@ -298,15 +301,20 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_log_in_button=0x7f050008;
         public static final int com_facebook_usersettingsfragment_logged_in=0x7f050009;
         public static final int com_facebook_usersettingsfragment_not_logged_in=0x7f05000a;
+        public static final int cook_tab=0x7f050026;
         public static final int dont_login=0x7f050023;
         public static final int facebook_login=0x7f050020;
         public static final int hello_world=0x7f05001e;
         public static final int menu_settings=0x7f05001f;
+        public static final int my_tab=0x7f050028;
+        public static final int news_tab=0x7f050025;
         public static final int pull_to_refresh_pull_label=0x7f05001a;
         public static final int pull_to_refresh_refreshing_label=0x7f05001c;
         public static final int pull_to_refresh_release_label=0x7f05001b;
         public static final int pull_to_refresh_tap_label=0x7f05001d;
         public static final int san_login=0x7f050021;
+        public static final int scan_tab=0x7f050027;
+        public static final int setup_tab=0x7f050029;
         public static final int sign_up=0x7f050022;
     }
     public static final class style {

@@ -9,4 +9,9 @@
     <string name="sign_up">Sign up</string>
     <string name="dont_login">Don\'t Login</string>
     <string name="app_id">502432043130046</string>
+    <string name="news_tab">News</string>
+    <string name="cook_tab">Cook</string>
+    <string name="scan_tab">Scan</string>
+    <string name="my_tab">My</string>
+    <string name="setup_tab">Setup</string>    
 </resources>

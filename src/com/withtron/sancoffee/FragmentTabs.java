@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Window;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 
@@ -23,23 +24,25 @@ public class FragmentTabs extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
     	Log.d("FragmentTabs", "onCreate");
         super.onCreate(savedInstanceState);
-        
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.fragment_tabs);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+        
         mTabHost = (TabHost)findViewById(android.R.id.tabhost);
         mTabHost.setup();
         
         mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
         
         mTabHost.setCurrentTab(0);
-        mTabManager.addTab(mTabHost.newTabSpec("NewsFragment").setIndicator("News"),
+        mTabManager.addTab(mTabHost.newTabSpec("NewsFragment").setIndicator(getString(R.string.news_tab)),
         		NewsFragment.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("CookFragment").setIndicator("Cook"),
+        mTabManager.addTab(mTabHost.newTabSpec("CookFragment").setIndicator(getString(R.string.cook_tab)),
         		CookFragment.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("ScanFragment").setIndicator("Scan"),
+        mTabManager.addTab(mTabHost.newTabSpec("ScanFragment").setIndicator(getString(R.string.scan_tab)),
         		ScanFragment.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("MyFragment").setIndicator("My"),
+        mTabManager.addTab(mTabHost.newTabSpec("MyFragment").setIndicator(getString(R.string.my_tab)),
         		MyFragment.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("SetupFragment").setIndicator("Setup"),
+        mTabManager.addTab(mTabHost.newTabSpec("SetupFragment").setIndicator(getString(R.string.setup_tab)),
         		SetupFragment.class, null);
 
       
