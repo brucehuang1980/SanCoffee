@@ -1,6 +1,5 @@
 package com.withtron.sancoffee;
 
-
 import com.withtron.sancoffee.R;
 
 import android.content.Intent;
@@ -17,12 +16,9 @@ public class ScanFragment extends Fragment {
 		// TODO Auto-generated method stub
 		Log.d("ScanFragment", "onCreate");
 		super.onCreate(savedInstanceState);
-		
-		Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-		intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-		startActivityForResult(intent, 0);
-		//IntentIntegrator integrator = new IntentIntegrator(yourActivity);
-		//integrator.initiateScan();
+
+		IntentIntegrator integrator = new IntentIntegrator(getActivity());
+		integrator.initiateScan();
 	}
 
 	@Override
@@ -32,11 +28,4 @@ public class ScanFragment extends Fragment {
 		Log.d("ScanFragment", "onCreateView");
 		return inflater.inflate(R.layout.activity_scan, container, false);
 	}
-	
-	@Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == 0) {
-
-        }
-    }
 }

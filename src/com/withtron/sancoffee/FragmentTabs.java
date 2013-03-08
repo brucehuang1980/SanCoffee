@@ -113,4 +113,12 @@ public class FragmentTabs extends FragmentActivity {
 			}
         }
     }
+    
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+		if (scanResult != null) {
+			// handle scan result
+		}
+		// else continue with any other code you need in the method
+	}
 }
