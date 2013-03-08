@@ -22,6 +22,6 @@ public class MyFragment extends Fragment {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		Log.d("MyFragment", "onCreateView");
-		return inflater.inflate(R.layout.list, container, false);
+		return inflater.inflate(R.layout.pull_to_refresh, container, false);
 	}
 }

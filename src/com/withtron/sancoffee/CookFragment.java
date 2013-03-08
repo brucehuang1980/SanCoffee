@@ -22,6 +22,6 @@ public class CookFragment extends Fragment {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		Log.d("CookFragment", "onCreateView");
-		return inflater.inflate(R.layout.list, container, false);
+		return inflater.inflate(R.layout.pull_to_refresh, container, false);
 	}
 }

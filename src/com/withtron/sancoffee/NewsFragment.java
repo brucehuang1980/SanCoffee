@@ -2,25 +2,33 @@ package com.withtron.sancoffee;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.withtron.sancoffee.R;
+import com.withtron.sancoffee.FragmentTabs.UserNameRequestTask;
 
 import com.markupartist.android.widget.PullToRefreshListView;
 import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
@@ -41,14 +49,15 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class NewsFragment extends ListFragment {
-	private LinkedList<String> mListItems;
 	private PullToRefreshListView mPullToRefreshListView;
+	private ArrayList<HashMap<String, String>> mNewsList;
+	private boolean mLoading = false;  // ISSUE, avoid dup source code (parse news and download image)
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		Log.d("NewsFragment", "onCreate");
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		new NewsRequestTask().execute("http://chopchop.corel.com/api/trends?type=2");
+		mNewsList = new ArrayList<HashMap<String, String>>();
 	}
 
 	@Override
@@ -64,20 +73,57 @@ public class NewsFragment extends ListFragment {
 		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Do work to refresh the list here.
-                new GetDataTask().execute();
+            	mLoading = true;
+            	new NewsRequestTask().execute("http://chopchop.corel.com/api/trends?type=1");
             }
         });
+		
+		mPullToRefreshListView.setOnItemClickListener(new OnItemClickListener(){
 
-        mListItems = new LinkedList<String>();
-        mListItems.addAll(Arrays.asList(mStrings));
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, mListItems);
-
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(getActivity(), SingleListItem.class);
+				startActivity(i);
+			}
+			
+		});
+		
+		UpdateListItems();
+		
+        int count = mNewsList.size();
+        if (count ==0){
+        	new NewsRequestTask().execute("http://chopchop.corel.com/api/trends?type=1");
+        }
+        
+        LazyAdapter adapter = new LazyAdapter(getActivity(), mNewsList); 
         ((PullToRefreshListView) view.findViewById(android.R.id.list)).setAdapter(adapter);
         
         return view;
 		
+	}
+	
+	private void UpdateListItems(){
+		mNewsList.clear();
+        // Query db
+		SqlOpenHelper helper = new SqlOpenHelper(getActivity());
+		SQLiteDatabase database = helper.getWritableDatabase();        
+        Cursor listCursor = database.query(SqlOpenHelper.TABLE_NEWS, null, null, null, null, null, null, null);
+        listCursor.moveToFirst();
+        if (! listCursor.isAfterLast()){
+        	do{
+        		HashMap<String, String> map = new HashMap<String, String>();
+        		map.put(SqlOpenHelper.NEWS_COLUMN_ID, listCursor.getString(0));
+        		map.put(SqlOpenHelper.NEWS_COLUMN_TEXTID, listCursor.getString(1));
+        		map.put(SqlOpenHelper.NEWS_COLUMN_TITLE, listCursor.getString(2));
+        		map.put(SqlOpenHelper.NEWS_COLUMN_DESCRIPTION, listCursor.getString(3));
+        		map.put(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI, listCursor.getString(4));
+        		mNewsList.add(map);
+        	}while (listCursor.moveToNext());
+        }
+        listCursor.close();
+        database.close();
 	}
 	
     public class NewsRequestTask extends RequestTask{
@@ -91,6 +137,9 @@ public class NewsFragment extends ListFragment {
             	if (result == null){
             	}
             	else{
+            		SqlOpenHelper helper = new SqlOpenHelper(getActivity());
+            		SQLiteDatabase database = helper.getWritableDatabase();
+            		
     				JSONObject jObject = new JSONObject(result);
     				int count = jObject.getInt("count");
     				for(int i = 0; i< count; i ++){
@@ -101,11 +150,12 @@ public class NewsFragment extends ListFragment {
         				String thumbnailUrl = item.getString("thumbnail");
         				String FILENAME = id + ".jpg";
 
-        				// save thumbnail to local
         				File file = getActivity().getFileStreamPath(FILENAME);
-        				if (file != null && file.exists()) {
-        				}
-        				else{
+        				if (file != null && file.exists()) 
+        					continue;
+        				
+        				// save thumbnail to local
+        				try{
             				FileOutputStream fos = getActivity().openFileOutput(FILENAME, Context.MODE_PRIVATE);
             				URL url = new URL(thumbnailUrl);
             				HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -125,8 +175,21 @@ public class NewsFragment extends ListFragment {
             				}             
             				inputStream.close();
             				fos.close();
+            				
+            				// insert to db
+            				ContentValues values = new ContentValues();
+            				values.put(SqlOpenHelper.NEWS_COLUMN_TEXTID, id);
+            				values.put(SqlOpenHelper.NEWS_COLUMN_TITLE, title);
+            				values.put(SqlOpenHelper.NEWS_COLUMN_DESCRIPTION, description);
+            				values.put(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI, file.getAbsolutePath());
+            				
+            				long insertId = database.insert(SqlOpenHelper.TABLE_NEWS, null, values);
+        				}catch (FileNotFoundException e){
+        					e.printStackTrace();
+        					Log.d("Save image not find, url = " + thumbnailUrl, "FragmentRequestTask");
         				}
     				}
+    				database.close();
             	}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -137,37 +200,12 @@ public class NewsFragment extends ListFragment {
 				e.printStackTrace();
 				Log.d("IOException, e = " + e , "FragmentRequestTask");
 			}
-        }
-    }
-	
-	private class GetDataTask extends AsyncTask<Void, Void, String[]> {
-
-        @Override
-        protected String[] doInBackground(Void... params) {
-            // Simulates a background job.
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                ;
+            
+            if (mLoading){ 
+            	mLoading = false;
+            	UpdateListItems();
+            	mPullToRefreshListView.onRefreshComplete();
             }
-            return mStrings;
-        }
-
-        @Override
-        protected void onPostExecute(String[] result) {
-            mListItems.addFirst("Added after refresh...");
-
-            // Call onRefreshComplete when the list has been refreshed.
-            //((PullToRefreshListView) view.findViewById(R.id.pulltorefreshlist)).onRefreshComplete();
-            mPullToRefreshListView.onRefreshComplete();
-
-            super.onPostExecute(result);
         }
     }
-
-    private String[] mStrings = {
-            "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam",
-            "Abondance", "Ackawi", "Acorn", "Adelost", "Affidelice au Chablis",
-            "Afuega'l Pitu", "Airag", "Airedale", "Aisy Cendre",
-            "Allgauer Emmentaler"};
 }

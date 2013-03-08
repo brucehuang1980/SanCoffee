@@ -22,6 +22,6 @@ public class SetupFragment extends Fragment {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		Log.d("SetupFragment", "onCreateView");
-		return inflater.inflate(R.layout.list, container, false);
+		return inflater.inflate(R.layout.activity_setup, container, false);
 	}
 }

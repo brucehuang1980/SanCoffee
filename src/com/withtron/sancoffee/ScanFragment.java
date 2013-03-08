@@ -30,9 +30,10 @@ public class ScanFragment extends Fragment {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		Log.d("ScanFragment", "onCreateView");
-		return inflater.inflate(R.layout.list, container, false);
+		return inflater.inflate(R.layout.activity_scan, container, false);
 	}
 	
+	@Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == 0) {
 
