@@ -1,7 +1,13 @@
 package com.withtron.sancoffee;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -16,6 +22,8 @@ import org.w3c.dom.Text;
 
 import com.facebook.Session;
 import com.withtron.sancoffee.R;
+
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -77,22 +85,22 @@ public class FragmentTabs extends FragmentActivity {
         Log.d("facebook token = " + token, "FragmentTabs");
         String url = "https://graph.facebook.com/me?fields=id,name&access_token=" + token;
         Log.d("Query facebook user name, url = " + url, "FragmentTabs");
-    	new FragmentRequestTask().execute(url);
+    	new UserNameRequestTask().execute(url);
     }
     
-    public class FragmentRequestTask extends RequestTask{
+    public class UserNameRequestTask extends RequestTask{
 
         @Override
         protected void onPostExecute(String result) {
         	super.onPostExecute(result);
             //Do anything with response..
             try {
+            	Log.d("FragmentRequestTask resutl = " + result, "FragmentRequestTask");
             	if (result == null){
     				TextView text = (TextView)findViewById(R.id.fb_user_name);
-    				text.setText("None");
+    				text.setText("");
             	}
             	else{
-                	Log.d("FragmentRequestTask resutl = " + result, "FragmentRequestTask");
     				JSONObject jObject = new JSONObject(result);
     				String userName = jObject.getString("name");
     				TextView text = (TextView)findViewById(R.id.fb_user_name);
