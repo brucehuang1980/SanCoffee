@@ -78,18 +78,6 @@ public class NewsFragment extends ListFragment {
             }
         });
 		
-		mPullToRefreshListView.setOnItemClickListener(new OnItemClickListener(){
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(getActivity(), SingleListItem.class);
-				startActivity(i);
-			}
-			
-		});
-		
 		UpdateListItems();
 		
         int count = mNewsList.size();
@@ -126,11 +114,21 @@ public class NewsFragment extends ListFragment {
         database.close();
 	}
 	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		// TODO Auto-generated method stub
+		Intent i = new Intent(getActivity(), SingleListItemActivity.class);
+		i.putExtra(SqlOpenHelper.NEWS_COLUMN_TITLE, mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_TITLE));
+		i.putExtra(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI, mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI));
+		startActivity(i);
+	}
+	
     public class NewsRequestTask extends RequestTask{
 
         @Override
-        protected void onPostExecute(String result) {
-        	super.onPostExecute(result);
+		protected String doInBackground(String... uri) {
+			// TODO Auto-generated method stub
+        	String result = getHttpRequest(uri);
             //Do anything with response..
             try {
             	Log.d("NewsRequestTask resutl = " + result, "FragmentRequestTask");
@@ -200,7 +198,13 @@ public class NewsFragment extends ListFragment {
 				e.printStackTrace();
 				Log.d("IOException, e = " + e , "FragmentRequestTask");
 			}
-            
+            return result;
+		}
+
+		@Override
+        protected void onPostExecute(String result) {
+        	super.onPostExecute(result);
+            //Do anything with response..
             if (mLoading){ 
             	mLoading = false;
             	UpdateListItems();

@@ -16,8 +16,7 @@ import android.util.Log;
 
 public class RequestTask extends AsyncTask<String, String, String>{
 
-    @Override
-    protected String doInBackground(String... uri) {
+	protected String getHttpRequest(String... uri){
         HttpClient httpclient = new DefaultHttpClient();
         HttpResponse response;
         String responseString = null;
@@ -42,6 +41,11 @@ public class RequestTask extends AsyncTask<String, String, String>{
         	Log.d("RequestTask Get IOException", "FragmentTabs");
         }
         return responseString;
+	}
+	
+    @Override
+    protected String doInBackground(String... uri) {
+    	return getHttpRequest(uri);
     }
 
     @Override
