@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class ScanFragment extends Fragment {
 	@Override
@@ -27,5 +28,10 @@ public class ScanFragment extends Fragment {
 		// TODO Auto-generated method stub
 		Log.d("ScanFragment", "onCreateView");
 		return inflater.inflate(R.layout.activity_scan, container, false);
+	}
+	
+	public void setQRCode(String code){
+		TextView tv = (TextView)this.getView().findViewById(R.id.scanresult);
+		tv.setText(code);
 	}
 }

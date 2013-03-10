@@ -12,6 +12,10 @@
     <string name="news_tab">News</string>
     <string name="cook_tab">Cook</string>
     <string name="scan_tab">Scan</string>
+    <string name="scan_or">Or</string>
+    <string name="scan_result">掃描結果\:</string>
+    <string name="scan_input_sn">請輸入序號</string>
+    <string name="scan_ok">確認</string>
     <string name="my_tab">My</string>
-    <string name="setup_tab">Setup</string>    
+    <string name="setup_tab">Setup</string>
 </resources>

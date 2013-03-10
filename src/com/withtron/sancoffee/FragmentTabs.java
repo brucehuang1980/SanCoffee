@@ -118,6 +118,8 @@ public class FragmentTabs extends FragmentActivity {
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 		if (scanResult != null) {
 			// handle scan result
+			ScanFragment scanFrag = (ScanFragment)getSupportFragmentManager().findFragmentByTag("ScanFragment");
+			scanFrag.setQRCode(scanResult.getContents());
 		}
 		// else continue with any other code you need in the method
 	}
