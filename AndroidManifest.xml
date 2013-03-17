@@ -33,6 +33,12 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name="com.withtron.sancoffee.SingleListItemActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name="com.withtron.sancoffee.FacebookLoginActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.withtron.sancoffee.SanLoginActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.withtron.sancoffee.SanSignUpActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 	
 </manifest>

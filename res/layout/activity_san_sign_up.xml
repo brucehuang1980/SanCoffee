@@ -1,0 +1,99 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+
+    <Button
+        android:id="@+id/san_sign_up_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/sign_up" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/sign_up_account" 
+        android:layout_marginTop="100dp"/>
+    
+    <EditText
+        android:id="@+id/sign_up_account"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+         />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/password" 
+        android:layout_marginTop="150dp"/>
+    
+    <EditText
+        android:id="@+id/sign_up_password"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="170dp"
+         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/password_again" 
+        android:layout_marginTop="200dp"/>
+    
+    <EditText
+        android:id="@+id/sign_up_password2"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220dp"
+         />
+            
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/nickname" 
+        android:layout_marginTop="250dp"/>
+    
+    <EditText
+        android:id="@+id/sign_up_nickname"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="270dp"
+         />
+    
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:layout_marginTop="310dp"
+        android:layout_centerHorizontal="true"
+         />    
+         
+    <Button
+        android:id="@+id/sign_up_fb_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/facebook_login"
+        android:layout_marginTop="360dp"
+        android:layout_centerHorizontal="true"
+         />    
+         
+    
+</RelativeLayout>

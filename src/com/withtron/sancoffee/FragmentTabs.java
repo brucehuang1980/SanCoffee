@@ -81,11 +81,16 @@ public class FragmentTabs extends FragmentActivity {
         }   
         
         Session session = Session.getActiveSession();
-        String token = session.getAccessToken();
-        Log.d("facebook token = " + token, "FragmentTabs");
-        String url = "https://graph.facebook.com/me?fields=id,name&access_token=" + token;
-        Log.d("Query facebook user name, url = " + url, "FragmentTabs");
-    	new UserNameRequestTask().execute(url);
+        if (session != null && session.isOpened()) {
+            String token = session.getAccessToken();
+            Log.d("facebook token = " + token, "FragmentTabs");
+            String url = "https://graph.facebook.com/me?fields=id,name&access_token=" + token;
+            Log.d("Query facebook user name, url = " + url, "FragmentTabs");
+        	new UserNameRequestTask().execute(url);
+        } 
+        else{
+        	Log.d("Get session fail!, session = " + session, "FragmentTabs");
+        }
     }
     
     public class UserNameRequestTask extends RequestTask{
