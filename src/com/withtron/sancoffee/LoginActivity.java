@@ -46,14 +46,14 @@ public class LoginActivity extends Activity{
             final Button button_dontlogin = (Button) findViewById(R.id.dontlogin);
             button_dontlogin.setOnClickListener(new View.OnClickListener() {
             	public void onClick(View view) {
-                    Intent intent = new Intent(LoginActivity.this, FragmentTabs.class);
+                    Intent intent = new Intent(LoginActivity.this, FragmentTabsActivity.class);
                     startActivity(intent);	        		
             	}
             });
             
 		}
         else{
-            Intent intent = new Intent(this, FragmentTabs.class);
+            Intent intent = new Intent(this, FragmentTabsActivity.class);
             startActivity(intent);		
         }
 	}

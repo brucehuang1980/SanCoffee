@@ -31,7 +31,10 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
@@ -41,7 +44,7 @@ import android.widget.TextView;
  * TabHost through fragments.  It uses a trick (see the code below) to allow
  * the tabs to switch between fragments instead of simple views.
  */
-public class FragmentTabs extends FragmentActivity {
+public class FragmentTabsActivity extends FragmentActivity {
     private TabHost mTabHost;
     private TabManager mTabManager;
 
@@ -50,7 +53,7 @@ public class FragmentTabs extends FragmentActivity {
     	Log.d("FragmentTabs", "onCreate");
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-        setContentView(R.layout.fragment_tabs);
+        setContentView(R.layout.activity_fragment_tabs);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
         
         mTabHost = (TabHost)findViewById(android.R.id.tabhost);
@@ -59,15 +62,15 @@ public class FragmentTabs extends FragmentActivity {
         mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
         
         mTabHost.setCurrentTab(0);
-        mTabManager.addTab(mTabHost.newTabSpec("NewsFragment").setIndicator(getString(R.string.news_tab)),
+        mTabManager.addTab(mTabHost.newTabSpec("NewsFragment").setIndicator("", this.getResources().getDrawable(R.drawable.icon1)),
         		NewsFragment.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("CookFragment").setIndicator(getString(R.string.cook_tab)),
+        mTabManager.addTab(mTabHost.newTabSpec("CookFragment").setIndicator("", this.getResources().getDrawable(R.drawable.icon2)),
         		CookFragment.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("ScanFragment").setIndicator(getString(R.string.scan_tab)),
+        mTabManager.addTab(mTabHost.newTabSpec("ScanFragment").setIndicator("", this.getResources().getDrawable(R.drawable.icon3)),
         		ScanFragment.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("MyFragment").setIndicator(getString(R.string.my_tab)),
+        mTabManager.addTab(mTabHost.newTabSpec("MyFragment").setIndicator("", this.getResources().getDrawable(R.drawable.icon4)),
         		MyFragment.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("SetupFragment").setIndicator(getString(R.string.setup_tab)),
+        mTabManager.addTab(mTabHost.newTabSpec("SetupFragment").setIndicator("", this.getResources().getDrawable(R.drawable.icon5)),
         		SetupFragment.class, null);
 
         DisplayMetrics dm = new DisplayMetrics();   
@@ -77,7 +80,7 @@ public class FragmentTabs extends FragmentActivity {
         TabWidget tabWidget = mTabHost.getTabWidget();   //取得tab的物件
         int count = tabWidget.getChildCount();   //取得tab的分頁有幾個
         for (int i = 0; i < count; i++) {   
-            tabWidget.getChildTabViewAt(i).setMinimumWidth((screenWidth / count)+8);//設定每一個分頁最小的寬度   
+            tabWidget.getChildTabViewAt(i).getLayoutParams().width = (screenWidth / count) + 8;
         }   
         
         Session session = Session.getActiveSession();

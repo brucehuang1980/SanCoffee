@@ -31,7 +31,7 @@ public class SanSignUpActivity extends Activity{
         button_register.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View view) { 
         		 new AlertDialog.Builder(SanSignUpActivity.this).setMessage(R.string.sign_up_success).setPositiveButton(R.string.ok,new DialogInterface.OnClickListener(){public void onClick(DialogInterface dialog, int which) {
-                     Intent intent = new Intent(SanSignUpActivity.this, FragmentTabs.class);
+                     Intent intent = new Intent(SanSignUpActivity.this, FragmentTabsActivity.class);
                      startActivity(intent);	       			 
         		 }}).show();
         	}

@@ -17,7 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.withtron.sancoffee.R;
-import com.withtron.sancoffee.FragmentTabs.UserNameRequestTask;
+import com.withtron.sancoffee.FragmentTabsActivity.UserNameRequestTask;
 
 import com.markupartist.android.widget.PullToRefreshListView;
 import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;

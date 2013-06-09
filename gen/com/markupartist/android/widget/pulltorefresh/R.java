@@ -25,8 +25,8 @@ public final class R {
 		public static final int pull_to_refresh_header = 0x7f030016;
 	}
 	public static final class drawable {
-		public static final int pull_to_refresh_header_background = 0x7f020029;
-		public static final int icon = 0x7f020024;
-		public static final int ic_pulltorefresh_arrow = 0x7f020023;
+		public static final int pull_to_refresh_header_background = 0x7f020030;
+		public static final int icon = 0x7f020026;
+		public static final int ic_pulltorefresh_arrow = 0x7f020025;
 	}
 }

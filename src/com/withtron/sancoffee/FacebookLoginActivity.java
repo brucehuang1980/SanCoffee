@@ -73,7 +73,7 @@ public class FacebookLoginActivity extends Activity{
         Session session = Session.getActiveSession();
         if (session.isOpened()) {
         	((SanCoffeeApp) getApplication()).setFacebookAccessToken(session.getAccessToken());
-            Intent intent = new Intent(this, FragmentTabs.class);
+            Intent intent = new Intent(this, FragmentTabsActivity.class);
             startActivity(intent);		
         } else {
         }
