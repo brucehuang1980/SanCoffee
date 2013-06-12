@@ -22,6 +22,7 @@ import com.withtron.sancoffee.FragmentTabsActivity.UserNameRequestTask;
 import com.markupartist.android.widget.PullToRefreshListView;
 import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
 
+import android.app.ActivityGroup;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +35,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,6 +44,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -117,11 +120,25 @@ public class NewsFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
-		Intent i = new Intent(getActivity(), SingleListItemActivity.class);
-		i.putExtra(SqlOpenHelper.NEWS_COLUMN_TITLE, mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_TITLE));
-		i.putExtra(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI, mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI));
-		startActivity(i);
+		//Intent i = new Intent(getActivity(), SingleListItemActivity.class);
+		//i.putExtra(SqlOpenHelper.NEWS_COLUMN_TITLE, mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_TITLE));
+		//i.putExtra(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI, mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI));
+		//startActivity(i);
+		getListView().setItemChecked(position, true);
+		DetailsFragment details = (DetailsFragment)
+                getFragmentManager().findFragmentById(R.id.item_details);
+		if (details == null) {
+            // Make new fragment to show this selection.
+            details = DetailsFragment.newInstance(mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_TITLE), mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI));
+    		FragmentTransaction ft = getFragmentManager().beginTransaction();
+    		ft.replace(R.id.list_container, details);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(null);
+            ft.commit();
+		}
+
 	}
+	
 	
     public class NewsRequestTask extends RequestTask{
 

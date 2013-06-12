@@ -3,16 +3,30 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:id="@+id/contentPane"
     >
     <!--
     The PullToRefreshListView replaces a standard ListView widget.
     -->
-    <com.markupartist.android.widget.PullToRefreshListView
-        android:id="@+id/android:list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:divider="#b5b5b5"
-        android:dividerHeight="1dp"
-        android:listSelector="@drawable/list_selector"
-        />
+
+
+	<FrameLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"	    
+	    android:id="@+id/list_container"
+	    >
+		<com.markupartist.android.widget.PullToRefreshListView
+		        android:id="@+id/android:list"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:divider="#b5b5b5"
+		        android:dividerHeight="1dp"
+		        android:listSelector="@drawable/list_selector"
+		        />
+    </FrameLayout>
+	<FrameLayout android:id="@+id/item_details" 
+	    android:layout_weight="1"
+		android:layout_width="0px" 
+		android:layout_height="match_parent"
+		/>
 </LinearLayout>
