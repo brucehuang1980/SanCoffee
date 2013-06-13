@@ -44,7 +44,9 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -120,23 +122,17 @@ public class NewsFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
-		//Intent i = new Intent(getActivity(), SingleListItemActivity.class);
-		//i.putExtra(SqlOpenHelper.NEWS_COLUMN_TITLE, mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_TITLE));
-		//i.putExtra(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI, mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI));
-		//startActivity(i);
-		getListView().setItemChecked(position, true);
-		DetailsFragment details = (DetailsFragment)
-                getFragmentManager().findFragmentById(R.id.item_details);
-		if (details == null) {
-            // Make new fragment to show this selection.
-            details = DetailsFragment.newInstance(mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_TITLE), mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI));
-    		FragmentTransaction ft = getFragmentManager().beginTransaction();
-    		ft.replace(R.id.list_container, details);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.addToBackStack(null);
-            ft.commit();
-		}
-
+		ImageView image = (ImageView)getActivity().findViewById(R.id.titel_bar_image);
+		image.setVisibility(View.GONE);
+		ImageView back_image = (ImageView)getActivity().findViewById(R.id.titel_bar_back_image);
+		back_image.setVisibility(View.VISIBLE);
+		
+		DetailsFragment details = DetailsFragment.newInstance(mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_TITLE), mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI));
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		ft.replace(R.id.list_container, details);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(null);
+        ft.commit();
 	}
 	
 	

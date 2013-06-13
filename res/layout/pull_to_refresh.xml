@@ -24,9 +24,4 @@
 		        android:listSelector="@drawable/list_selector"
 		        />
     </FrameLayout>
-	<FrameLayout android:id="@+id/item_details" 
-	    android:layout_weight="1"
-		android:layout_width="0px" 
-		android:layout_height="match_parent"
-		/>
 </LinearLayout>

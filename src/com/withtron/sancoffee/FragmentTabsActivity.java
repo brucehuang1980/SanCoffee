@@ -105,13 +105,13 @@ public class FragmentTabsActivity extends FragmentActivity {
             try {
             	Log.d("FragmentRequestTask resutl = " + result, "FragmentRequestTask");
             	if (result == null){
-    				TextView text = (TextView)findViewById(R.id.fb_user_name);
+    				TextView text = (TextView)findViewById(R.id.titel_bar_fb_user_name);
     				text.setText("");
             	}
             	else{
     				JSONObject jObject = new JSONObject(result);
     				String userName = jObject.getString("name");
-    				TextView text = (TextView)findViewById(R.id.fb_user_name);
+    				TextView text = (TextView)findViewById(R.id.titel_bar_fb_user_name);
     				text.setText(userName);
             	}
 			} catch (JSONException e) {

@@ -2,14 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <ImageView android:src="@drawable/logo"
+
+    <ImageView
+        android:id="@+id/titel_bar_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="3dp"
-        android:layout_alignParentLeft="true"/>
-    <TextView android:id="@+id/fb_user_name"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/titel_bar_fb_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/titel_bar_back_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/back" 
+        android:visibility="gone"/>
 </RelativeLayout>
