@@ -53,7 +53,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class NewsFragment extends ListFragment {
+public class NewsFragment extends Fragment {
 	private PullToRefreshListView mPullToRefreshListView;
 	private ArrayList<HashMap<String, String>> mNewsList;
 	private boolean mLoading = false;  // ISSUE, avoid dup source code (parse news and download image)
@@ -82,7 +82,28 @@ public class NewsFragment extends ListFragment {
             	new NewsRequestTask().execute("http://chopchop.corel.com/api/trends?type=1");
             }
         });
-		
+		mPullToRefreshListView.setOnItemClickListener(new OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position,long id) {
+        		Log.d("NewsFragment", "onItemClick");
+        		
+        		if (DetailsFragment.show_DetailsFragment)
+        			return;
+        		
+        		mPullToRefreshListView.setSelection(position);
+        		ImageView image = (ImageView)getActivity().findViewById(R.id.titel_bar_image);
+        		image.setVisibility(View.GONE);
+        		ImageView back_image = (ImageView)getActivity().findViewById(R.id.titel_bar_back_image);
+        		back_image.setVisibility(View.VISIBLE);
+        		
+        		DetailsFragment details = DetailsFragment.newInstance(mNewsList, position);
+        		FragmentTransaction ft = getFragmentManager().beginTransaction();
+        		ft.replace(R.id.list_container, details);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+		});
 		UpdateListItems();
 		
         int count = mNewsList.size();
@@ -118,23 +139,6 @@ public class NewsFragment extends ListFragment {
         listCursor.close();
         database.close();
 	}
-	
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// TODO Auto-generated method stub
-		ImageView image = (ImageView)getActivity().findViewById(R.id.titel_bar_image);
-		image.setVisibility(View.GONE);
-		ImageView back_image = (ImageView)getActivity().findViewById(R.id.titel_bar_back_image);
-		back_image.setVisibility(View.VISIBLE);
-		
-		DetailsFragment details = DetailsFragment.newInstance(mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_TITLE), mNewsList.get(position-1).get(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI));
-		FragmentTransaction ft = getFragmentManager().beginTransaction();
-		ft.replace(R.id.list_container, details);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.addToBackStack(null);
-        ft.commit();
-	}
-	
 	
     public class NewsRequestTask extends RequestTask{
 

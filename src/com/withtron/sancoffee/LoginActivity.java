@@ -2,6 +2,9 @@ package com.withtron.sancoffee;
 
 import com.withtron.sancoffee.R;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,16 +33,30 @@ public class LoginActivity extends Activity{
             final Button button_sanlogin = (Button) findViewById(R.id.sanlogin);
             button_sanlogin.setOnClickListener(new View.OnClickListener() {
             	public void onClick(View view) { 
-                    Intent intent = new Intent(LoginActivity.this, SanLoginActivity.class);
-                    startActivity(intent);		
+            		AlertDialog ad = new AlertDialog.Builder(LoginActivity.this).create();
+            		ad.setMessage("Not Ready");
+            		ad.setButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            	          public void onClick(DialogInterface dialog, int which) {
+                              Intent intent = new Intent(LoginActivity.this, FragmentTabsActivity.class);
+                              startActivity(intent);		
+                          }
+            		});
+            		ad.show();
             	}
             });
             
             final Button button_signup = (Button) findViewById(R.id.signup);
             button_signup.setOnClickListener(new View.OnClickListener() {
             	public void onClick(View view) {                     
-            		Intent intent = new Intent(LoginActivity.this, SanSignUpActivity.class);
-            		startActivity(intent);		 
+            		AlertDialog ad = new AlertDialog.Builder(LoginActivity.this).create();
+            		ad.setMessage("Not Ready");
+            		ad.setButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            	          public void onClick(DialogInterface dialog, int which) {
+                              Intent intent = new Intent(LoginActivity.this, FragmentTabsActivity.class);
+                              startActivity(intent);		
+                          }
+            		});
+            		ad.show();
             	}
             });
             

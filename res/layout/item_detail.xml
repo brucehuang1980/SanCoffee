@@ -1,4 +1,4 @@
-<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,4 +17,20 @@
             android:layout_width="300dip"
             android:layout_height="300dip"
 	/>
-</FrameLayout>
+
+ 	<ImageView
+ 	    android:id="@+id/image_left_arrow"
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_alignParentLeft="true"
+ 	    android:layout_centerVertical="true"
+ 	    android:src="@drawable/left_arrow" />
+
+ 	<ImageView
+ 	    android:id="@+id/image_right_arrow"
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_alignParentRight="true"
+ 	    android:layout_centerVertical="true"
+ 	    android:src="@drawable/right_arrow" />
+</RelativeLayout>
