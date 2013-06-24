@@ -73,10 +73,10 @@ public class SanSignUpActivity extends Activity{
         });
 	}
 	
-	class Login {
+	class SignUp {
 		  public int result = 0;
 		  public String msg = "";
-		  Login() {
+		  SignUp() {
 		  }
 		}
 
@@ -95,18 +95,18 @@ public class SanSignUpActivity extends Activity{
         protected void onPostExecute(String result) {
         	super.onPostExecute(result);
     		Gson gson = new Gson();
-    		Login login = gson.fromJson(result, Login.class);
-			if (login.result == 0){ // Success,
+    		SignUp signup = gson.fromJson(result, SignUp.class);
+			if (signup.result == 0){ // Success,
 				new AlertDialog.Builder(SanSignUpActivity.this).setMessage(R.string.sign_up_success).setPositiveButton(R.string.ok,new DialogInterface.OnClickListener(){public void onClick(DialogInterface dialog, int which) {
 					Intent intent = new Intent(SanSignUpActivity.this, FragmentTabsActivity.class);
 					startActivity(intent);	       			 
 				}}).show();
-			}else if (login.result ==1){
+			}else if (signup.result ==1){
 				new AlertDialog.Builder(SanSignUpActivity.this).setMessage(R.string.sign_up_already_registed).setPositiveButton(R.string.ok,new DialogInterface.OnClickListener(){public void onClick(DialogInterface dialog, int which) {
 				}}).show();
 			}
 			else{
-				new AlertDialog.Builder(SanSignUpActivity.this).setMessage(login.msg).setPositiveButton(R.string.ok,new DialogInterface.OnClickListener(){public void onClick(DialogInterface dialog, int which) {
+				new AlertDialog.Builder(SanSignUpActivity.this).setMessage(signup.msg).setPositiveButton(R.string.ok,new DialogInterface.OnClickListener(){public void onClick(DialogInterface dialog, int which) {
 				}}).show();
 			}
         }

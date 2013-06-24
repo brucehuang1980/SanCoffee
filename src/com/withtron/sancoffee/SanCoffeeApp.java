@@ -7,6 +7,11 @@ import android.util.Log;
 
 public class SanCoffeeApp extends Application {
 
+		public enum LoginType{
+		    SanApp,
+		    Facebook
+		}
+		
 		SharedPreferences mPrefs;
 
 		@Override
@@ -38,6 +43,32 @@ public class SanCoffeeApp extends Application {
 			Log.d("setFacebookAccessToken = " + token, "SanCoffeeApp");
 			SharedPreferences.Editor edit = mPrefs.edit();
 			edit.putString("fbAccessToken", token);
+			edit.commit();
+		}
+		
+		public String getSanSessionID(){
+			String sid = mPrefs.getString("sanSessionID", "");
+			Log.d("getSanSessionID = " + sid, "SanCoffeeApp");
+			return sid;
+		}
+		
+		public void setSanSessionID(String sid){
+			Log.d("setSanSessionID = " + sid, "SanCoffeeApp");
+			SharedPreferences.Editor edit = mPrefs.edit();
+			edit.putString("sanSessionID", sid);
+			edit.commit();
+		}
+		
+		public int getLoginType(){
+			int type = mPrefs.getInt("loginType", LoginType.SanApp.ordinal());
+			Log.d("getLoginType = " + type, "SanCoffeeApp");
+			return type;
+		}
+		
+		public void setLoginType(int type){
+			Log.d("setgetLoginType = " + type, "SanCoffeeApp");
+			SharedPreferences.Editor edit = mPrefs.edit();
+			edit.putInt("loginType", type);
 			edit.commit();
 		}
 }

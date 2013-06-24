@@ -64,15 +64,8 @@ public class LoginActivity extends Activity{
             button_sanlogin.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_san_login));
             button_sanlogin.setOnClickListener(new View.OnClickListener() {
             	public void onClick(View view) { 
-            		AlertDialog ad = new AlertDialog.Builder(LoginActivity.this).create();
-            		ad.setMessage("Not Ready");
-            		ad.setButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-            	          public void onClick(DialogInterface dialog, int which) {
-                              //Intent intent = new Intent(LoginActivity.this, SanLoginActivity.class);
-                              //startActivity(intent);		
-                          }
-            		});
-            		ad.show();
+                    Intent intent = new Intent(LoginActivity.this, SanLoginActivity.class);
+                    startActivity(intent);		
             	}
             });
             rl.addView(button_sanlogin);

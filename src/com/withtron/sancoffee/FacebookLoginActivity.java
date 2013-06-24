@@ -7,6 +7,7 @@ import com.facebook.Settings;
 
 import com.facebook.*;
 import com.facebook.model.*;
+import com.withtron.sancoffee.SanCoffeeApp.LoginType;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,6 +26,7 @@ public class FacebookLoginActivity extends Activity{
 	      public void call(Session session, SessionState state, Exception exception) {
 	        if (session.isOpened()) {
 	        	((SanCoffeeApp) getApplication()).setFacebookAccessToken(session.getAccessToken());
+	        	((SanCoffeeApp) getApplication()).setLoginType(LoginType.Facebook.ordinal());
 	        	((SanCoffeeApp) getApplication()).setRunned();
 	            Intent intent = new Intent(FacebookLoginActivity.this, FragmentTabsActivity.class);
 	            startActivity(intent);		
