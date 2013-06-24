@@ -13,71 +13,29 @@ import android.content.Intent;
 import android.os.Bundle;
 
 public class FacebookLoginActivity extends Activity{
-	private Session.StatusCallback statusCallback = new SessionStatusCallback();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
-        Settings.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
-
-        Session session = Session.getActiveSession();
-        if (session == null) {
-            if (savedInstanceState != null) {
-                session = Session.restoreSession(this, null, statusCallback, savedInstanceState);
-            }
-            if (session == null) {
-                session = new Session(this);
-            }
-            Session.setActiveSession(session);
-            if (session.getState().equals(SessionState.CREATED_TOKEN_LOADED)) {
-                session.openForRead(new Session.OpenRequest(this).setCallback(statusCallback));
-            }
-        }
-        else if (!session.isOpened() && !session.isClosed()) {
-            session.openForRead(new Session.OpenRequest(this).setCallback(statusCallback));
-        } else {
-        	// start Facebook Login
-            Session.openActiveSession(this, true, statusCallback);
-        }
+		// start Facebook Login
+	    Session.openActiveSession(FacebookLoginActivity.this, true, new Session.StatusCallback() {
+	      // callback when session changes state
+	      @Override
+	      public void call(Session session, SessionState state, Exception exception) {
+	        if (session.isOpened()) {
+	        	((SanCoffeeApp) getApplication()).setFacebookAccessToken(session.getAccessToken());
+	        	((SanCoffeeApp) getApplication()).setRunned();
+	            Intent intent = new Intent(FacebookLoginActivity.this, FragmentTabsActivity.class);
+	            startActivity(intent);		
+	        }
+	      }
+	    });
 	}
-	
-    @Override
-    public void onStart() {
-        super.onStart();
-        Session.getActiveSession().addCallback(statusCallback);
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        Session.getActiveSession().removeCallback(statusCallback);
-    }
-    
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, data);
-		Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    super.onActivityResult(requestCode, resultCode, data);
+	    Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
 	}
-	
-    private class SessionStatusCallback implements Session.StatusCallback {
-        @Override
-        public void call(Session session, SessionState state, Exception exception) {
-        	updateView();
-        }
-    }
-    
-    private void updateView() {
-        Session session = Session.getActiveSession();
-        if (session.isOpened()) {
-        	((SanCoffeeApp) getApplication()).setFacebookAccessToken(session.getAccessToken());
-            Intent intent = new Intent(this, FragmentTabsActivity.class);
-            startActivity(intent);		
-        } else {
-        }
-    }
-
-
 }

@@ -31,6 +31,7 @@
         android:layout_height="30dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
+        android:inputType="textEmailAddress"
          />
     
     <TextView
@@ -46,7 +47,9 @@
         android:layout_height="30dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="170dp"
+        android:inputType="textPassword"
          />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,6 +63,7 @@
         android:layout_height="30dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="220dp"
+        android:inputType="textPassword"
          />
             
     <TextView
@@ -76,7 +80,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="270dp"
          />
-    
 
     <Button
         android:id="@+id/register"

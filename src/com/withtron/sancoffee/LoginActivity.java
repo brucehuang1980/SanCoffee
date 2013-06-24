@@ -48,19 +48,8 @@ public class LoginActivity extends Activity{
             fb_button.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_fb_login));
             fb_button.setOnClickListener(new View.OnClickListener() {
             	public void onClick(View view) {
-            		// start Facebook Login
-            	    Session.openActiveSession(LoginActivity.this, true, new Session.StatusCallback() {
-            	      // callback when session changes state
-            	      @Override
-            	      public void call(Session session, SessionState state, Exception exception) {
-            	        if (session.isOpened()) {
-            	        	((SanCoffeeApp) getApplication()).setFacebookAccessToken(session.getAccessToken());
-            	        	((SanCoffeeApp) getApplication()).setRunned();
-            	            Intent intent = new Intent(LoginActivity.this, FragmentTabsActivity.class);
-            	            startActivity(intent);		
-            	        }
-            	      }
-            	    });
+                    Intent intent = new Intent(LoginActivity.this, FacebookLoginActivity.class);
+                    startActivity(intent);	
             	}
             });
             rl.addView(fb_button);
@@ -79,8 +68,8 @@ public class LoginActivity extends Activity{
             		ad.setMessage("Not Ready");
             		ad.setButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             	          public void onClick(DialogInterface dialog, int which) {
-                              Intent intent = new Intent(LoginActivity.this, FragmentTabsActivity.class);
-                              startActivity(intent);		
+                              //Intent intent = new Intent(LoginActivity.this, SanLoginActivity.class);
+                              //startActivity(intent);		
                           }
             		});
             		ad.show();
@@ -97,15 +86,8 @@ public class LoginActivity extends Activity{
             button_signup.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_san_signup));
             button_signup.setOnClickListener(new View.OnClickListener() {
             	public void onClick(View view) {                     
-            		AlertDialog ad = new AlertDialog.Builder(LoginActivity.this).create();
-            		ad.setMessage("Not Ready");
-            		ad.setButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-            	          public void onClick(DialogInterface dialog, int which) {
-                              Intent intent = new Intent(LoginActivity.this, FragmentTabsActivity.class);
-                              startActivity(intent);		
-                          }
-            		});
-            		ad.show();
+                    Intent intent = new Intent(LoginActivity.this, SanSignUpActivity.class);
+                    startActivity(intent);		
             	}
             });
             rl.addView(button_signup);
@@ -130,12 +112,5 @@ public class LoginActivity extends Activity{
             Intent intent = new Intent(this, FragmentTabsActivity.class);
             startActivity(intent);		
         }
-	}
-	
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    super.onActivityResult(requestCode, resultCode, data);
-	    Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
 	}
 }
