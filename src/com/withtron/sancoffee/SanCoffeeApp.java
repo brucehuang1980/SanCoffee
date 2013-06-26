@@ -23,8 +23,8 @@ public class SanCoffeeApp extends Application {
 		}
 		
 		public boolean getFirstRun(){
-			//return mPrefs.getBoolean("firstRun", true);
-			return true;
+			return mPrefs.getBoolean("firstRun", true);
+			//return true;
 		}
 		
 		public void setRunned(){
