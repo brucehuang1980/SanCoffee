@@ -35,4 +35,11 @@
     <string name="please_login">此功能為會員專屬, 請先登入帳號</string>
     <string name="recognize_sn_code_fail">此序號無法辨分或非本產品所提供</string>
     <string name="recognize_qr_code_fail">此QR Code無法辨分或非本產品所提供</string>
+    <string name="setup_auto_remind">自動提醒</string>
+    <string name="setup_logout">登出</string>
+    <string name="setup_copyright">版權宣言</string>
+    <string name="setup_about_us">關於我們</string>
+    <string name="setup_push_notification">豆期-推播</string>
+    <string name="setup_email">豆期-電子郵件</string>
+    <string name="setup_auto_remind_news">News-自動提醒</string>
 </resources>
