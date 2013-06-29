@@ -15,6 +15,12 @@
     <string name="scan_result">掃描結果\:</string>
     <string name="scan_input_sn">請輸入序號</string>
     <string name="scan_ok">確認</string>
+    <string name="scan_name">品名</string>
+    <string name="scan_bake_degree">烘培度</string>
+    <string name="scan_origin">產地</string>
+    <string name="scan_open_date">開封日期</string>
+    <string name="scan_not_login">未登錄</string>
+    <string name="scan_add_to_my_list">加到我的清單</string>
     <string name="my_tab">My</string>
     <string name="setup_tab">Setup</string>
     <string name="back">Back</string>

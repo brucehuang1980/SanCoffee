@@ -283,7 +283,7 @@ containing a value of this type.
         public static final int list_image=0x7f04002f;
         public static final int listview_setup=0x7f040013;
         public static final int login_layout=0x7f040004;
-        public static final int menu_settings=0x7f04003f;
+        public static final int menu_settings=0x7f040040;
         public static final int no_image_title=0x7f040033;
         public static final int normal=0x7f040001;
         public static final int picker_subtitle=0x7f040025;
@@ -301,6 +301,7 @@ containing a value of this type.
         public static final int san_password=0x7f040007;
         public static final int san_sign_up_back=0x7f04000b;
         public static final int scan_layout=0x7f040012;
+        public static final int scan_product_layout=0x7f04003c;
         public static final int scroller=0x7f040003;
         public static final int search_box=0x7f040024;
         public static final int sign_up_account=0x7f04000c;
@@ -310,9 +311,9 @@ containing a value of this type.
         public static final int sign_up_password2=0x7f04000e;
         public static final int small=0x7f040000;
         public static final int thumbnail=0x7f04002e;
-        public static final int titel_bar_back_image=0x7f04003e;
-        public static final int titel_bar_fb_user_name=0x7f04003d;
-        public static final int titel_bar_image=0x7f04003c;
+        public static final int titel_bar_back_image=0x7f04003f;
+        public static final int titel_bar_fb_user_name=0x7f04003e;
+        public static final int titel_bar_image=0x7f04003d;
         public static final int title=0x7f040030;
     }
     public static final class layout {
@@ -340,16 +341,17 @@ containing a value of this type.
         public static final int list_row_no_image=0x7f030015;
         public static final int pull_to_refresh=0x7f030016;
         public static final int pull_to_refresh_header=0x7f030017;
-        public static final int titlebar=0x7f030018;
+        public static final int scan_product_fragment=0x7f030018;
+        public static final int titlebar=0x7f030019;
     }
     public static final class menu {
         public static final int activity_main=0x7f090000;
     }
     public static final class string {
-        public static final int account=0x7f05002f;
+        public static final int account=0x7f050035;
         public static final int app_id=0x7f050024;
         public static final int app_name=0x7f050019;
-        public static final int back=0x7f05002e;
+        public static final int back=0x7f050034;
         public static final int com_facebook_choose_friends=0x7f05000f;
         public static final int com_facebook_dialogloginactivity_ok_button=0x7f050000;
         public static final int com_facebook_internet_permission_error_message=0x7f050013;
@@ -378,45 +380,51 @@ containing a value of this type.
         public static final int cook_tab=0x7f050026;
         public static final int dont_login=0x7f050023;
         public static final int facebook_login=0x7f050020;
-        public static final int forget_pw=0x7f050032;
+        public static final int forget_pw=0x7f050038;
         public static final int hello_world=0x7f05001e;
-        public static final int invalid_account_password=0x7f050037;
-        public static final int login=0x7f050031;
+        public static final int invalid_account_password=0x7f05003d;
+        public static final int login=0x7f050037;
         public static final int menu_settings=0x7f05001f;
-        public static final int my_tab=0x7f05002c;
+        public static final int my_tab=0x7f050032;
         public static final int news_tab=0x7f050025;
-        public static final int nickname=0x7f050035;
-        public static final int ok=0x7f050038;
-        public static final int password=0x7f050030;
-        public static final int password_again=0x7f050034;
-        public static final int please_login=0x7f05003d;
+        public static final int nickname=0x7f05003b;
+        public static final int ok=0x7f05003e;
+        public static final int password=0x7f050036;
+        public static final int password_again=0x7f05003a;
+        public static final int please_login=0x7f050043;
         public static final int pull_to_refresh_pull_label=0x7f05001a;
         public static final int pull_to_refresh_refreshing_label=0x7f05001c;
         public static final int pull_to_refresh_release_label=0x7f05001b;
         public static final int pull_to_refresh_tap_label=0x7f05001d;
-        public static final int recognize_qr_code_fail=0x7f05003f;
-        public static final int recognize_sn_code_fail=0x7f05003e;
-        public static final int register=0x7f050036;
+        public static final int recognize_qr_code_fail=0x7f050045;
+        public static final int recognize_sn_code_fail=0x7f050044;
+        public static final int register=0x7f05003c;
         public static final int san_login=0x7f050021;
+        public static final int scan_add_to_my_list=0x7f050031;
+        public static final int scan_bake_degree=0x7f05002d;
         public static final int scan_input_sn=0x7f05002a;
+        public static final int scan_name=0x7f05002c;
+        public static final int scan_not_login=0x7f050030;
         public static final int scan_ok=0x7f05002b;
+        public static final int scan_open_date=0x7f05002f;
         public static final int scan_or=0x7f050028;
+        public static final int scan_origin=0x7f05002e;
         public static final int scan_result=0x7f050029;
         public static final int scan_tab=0x7f050027;
-        public static final int send_password_to_mail=0x7f050039;
-        public static final int setup_about_us=0x7f050043;
-        public static final int setup_auto_remind=0x7f050040;
-        public static final int setup_auto_remind_news=0x7f050046;
-        public static final int setup_copyright=0x7f050042;
-        public static final int setup_email=0x7f050045;
-        public static final int setup_logout=0x7f050041;
-        public static final int setup_push_notification=0x7f050044;
-        public static final int setup_tab=0x7f05002d;
+        public static final int send_password_to_mail=0x7f05003f;
+        public static final int setup_about_us=0x7f050049;
+        public static final int setup_auto_remind=0x7f050046;
+        public static final int setup_auto_remind_news=0x7f05004c;
+        public static final int setup_copyright=0x7f050048;
+        public static final int setup_email=0x7f05004b;
+        public static final int setup_logout=0x7f050047;
+        public static final int setup_push_notification=0x7f05004a;
+        public static final int setup_tab=0x7f050033;
         public static final int sign_up=0x7f050022;
-        public static final int sign_up_account=0x7f050033;
-        public static final int sign_up_already_registed=0x7f05003b;
-        public static final int sign_up_confirm=0x7f05003c;
-        public static final int sign_up_success=0x7f05003a;
+        public static final int sign_up_account=0x7f050039;
+        public static final int sign_up_already_registed=0x7f050041;
+        public static final int sign_up_confirm=0x7f050042;
+        public static final int sign_up_success=0x7f050040;
     }
     public static final class style {
         /** 

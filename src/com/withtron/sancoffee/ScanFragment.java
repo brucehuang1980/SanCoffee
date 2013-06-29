@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,7 +91,11 @@ public class ScanFragment extends Fragment {
         button_ok.setText(R.string.scan_ok);
         button_ok.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View view) {
-
+        		FragmentTransaction ft = getFragmentManager().beginTransaction();
+        		ft.replace(R.id.scan_layout, new ScanProductFragment());
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(null);
+                ft.commit();
         	}
         });
         rl.addView(button_ok);
