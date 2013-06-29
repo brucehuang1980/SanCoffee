@@ -8,11 +8,11 @@ package com.markupartist.android.widget.pulltorefresh;
 
 public final class R {
 	public static final class id {
-		public static final int pull_to_refresh_progress = 0x7f040037;
-		public static final int pull_to_refresh_updated_at = 0x7f04003a;
-		public static final int pull_to_refresh_text = 0x7f040039;
-		public static final int pull_to_refresh_image = 0x7f040038;
-		public static final int pull_to_refresh_header = 0x7f040036;
+		public static final int pull_to_refresh_progress = 0x7f040038;
+		public static final int pull_to_refresh_updated_at = 0x7f04003b;
+		public static final int pull_to_refresh_text = 0x7f04003a;
+		public static final int pull_to_refresh_image = 0x7f040039;
+		public static final int pull_to_refresh_header = 0x7f040037;
 	}
 	public static final class string {
 		public static final int pull_to_refresh_refreshing_label = 0x7f05001c;

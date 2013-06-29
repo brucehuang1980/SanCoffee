@@ -2,6 +2,9 @@ package com.withtron.sancoffee;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import com.withtron.sancoffee.NewsFragment.NewsData;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,19 +18,19 @@ import android.widget.TextView;
 public class LazyAdapter extends BaseAdapter {
     
     private Activity activity;
-    private ArrayList<HashMap<String, String>> data;
+    private HashMap<String, NewsData> mData;
     private static LayoutInflater inflater=null;
     public ImageLoader imageLoader; 
     
-    public LazyAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
+    public LazyAdapter(Activity a, HashMap<String, NewsData> d) {
         activity = a;
-        data=d;
+        mData=d;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         imageLoader=new ImageLoader(activity.getApplicationContext());
     }
 
     public int getCount() {
-        return data.size();
+        return mData.size();
     }
 
     public Object getItem(int position) {
@@ -41,21 +44,22 @@ public class LazyAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi=convertView;
         if(convertView==null)
-            vi = inflater.inflate(R.layout.list_row, null);
+            vi = inflater.inflate(R.layout.list_row_no_image, null);
 
-        TextView title = (TextView)vi.findViewById(R.id.title); // title
-        TextView artist = (TextView)vi.findViewById(R.id.artist); // artist name
-        TextView duration = (TextView)vi.findViewById(R.id.duration); // duration
-        ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image); // thumb image
+        TextView title = (TextView)vi.findViewById(R.id.no_image_title); // title
+        //TextView artist = (TextView)vi.findViewById(R.id.artist); // artist name
+        //ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image); // thumb image
         
         HashMap<String, String> item = new HashMap<String, String>();
-        item = data.get(position);
+        //item = data.get(position);
+        List keys = new ArrayList(mData.keySet());
+        NewsData data = mData.get(keys.get(position));
         
         // Setting all values in listview
-        title.setText(item.get(SqlOpenHelper.NEWS_COLUMN_TITLE));
+        title.setText(data.news_title);
         //artist.setText(item.get(CustomizedListView.KEY_ARTIST));
         //duration.setText(item.get(CustomizedListView.KEY_DURATION));
-        imageLoader.DisplayImage(item.get(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI), thumb_image);
+        //imageLoader.DisplayImage(item.get(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI), thumb_image);
         return vi;
     }
 }

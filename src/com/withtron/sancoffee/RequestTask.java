@@ -35,10 +35,10 @@ public class RequestTask extends AsyncTask<String, String, String>{
             }
         } catch (ClientProtocolException e) {
             //TODO Handle problems..
-        	Log.d("RequestTask Get ClientProtocolException", "FragmentTabs");
+        	Log.d("RequestTask Get ClientProtocolException", "RequestTask");
         } catch (IOException e) {
             //TODO Handle problems..
-        	Log.d("RequestTask Get IOException", "FragmentTabs");
+        	Log.d("RequestTask Get IOException", "RequestTask");
         }
         return responseString;
 	}

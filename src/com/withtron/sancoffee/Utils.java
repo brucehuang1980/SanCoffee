@@ -3,6 +3,11 @@ package com.withtron.sancoffee;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 public class Utils {
     public static void CopyStream(InputStream is, OutputStream os)
     {
@@ -19,5 +24,15 @@ public class Utils {
             }
         }
         catch(Exception ex){}
+    }
+    
+    public static boolean isOnline(Activity activity) {
+        ConnectivityManager conMgr = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+
+        if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+            return false;
+        }
+    return true; 
     }
 }

@@ -58,8 +58,8 @@ public class SetupFragment extends Fragment {
 			public View getView(int position, View convertView, ViewGroup parent) {
 				// TODO Auto-generated method stub
 				LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View view = inflater.inflate(R.layout.list_row_setup, null);
-				TextView textView = (TextView)view.findViewById(R.id.setup_title);
+				View view = inflater.inflate(R.layout.list_row_no_image, null);
+				TextView textView = (TextView)view.findViewById(R.id.no_image_title);
 				textView.setText(m_list_setup[position]);
 				return view;
 			}

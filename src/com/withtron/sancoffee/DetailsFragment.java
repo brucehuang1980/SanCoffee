@@ -2,6 +2,10 @@ package com.withtron.sancoffee;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import com.withtron.sancoffee.NewsFragment.NewsData;
+import com.withtron.sancoffee.NewsFragment.NewsItem;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -23,24 +28,45 @@ public class DetailsFragment extends Fragment {
      * show the text at 'index'.
      */
 	static boolean show_DetailsFragment = false; // ISSUE, why receive user click event after setTransition
-	static ArrayList<HashMap<String, String>> m_list;
+	static HashMap<String, ArrayList<NewsItem>> m_list;
 	static int m_position = 0;
-	TextView m_tv;
-	ImageView m_iv;
 	ImageView m_left_image;
 	ImageView m_right_image;
-    public static DetailsFragment newInstance(ArrayList<HashMap<String, String>> list, int position ) {
+	LinearLayout m_ll;
+    public static DetailsFragment newInstance(HashMap<String, ArrayList<NewsItem>> map, int position ) {
     	Log.d("DetailsFragment", "newInstance");
     	
-    	m_list = list;
-    	m_position = position;
+    	m_list = map;
+    	m_position = position -1;
     	
         DetailsFragment f = new DetailsFragment();
         return f;
     }
 
     public int getShownIndex() {
+    	Log.d("DetailsFragment", "getShownIndex");
         return getArguments().getInt("index", 0);
+    }
+    
+    public void updateView(){
+    	Log.d("DetailsFragment", "updateView");
+    	m_ll.removeAllViews();
+        List keys = new ArrayList(m_list.keySet());
+        ArrayList<NewsItem> array = m_list.get(keys.get(m_position));
+        for (int i=0;i<array.size();i++){
+        	if (array.get(i).data_type == 1) {// pic
+        		ImageView iv = new ImageView(getActivity());
+        		Uri imgUri = Uri.parse("file:///data/data/com.withtron.sancoffee/files/" + keys.get(m_position) + "_" + array.get(i).data_content.substring( array.get(i).data_content.lastIndexOf('/')+1, array.get(i).data_content.length()));
+        		iv.setImageURI(imgUri);
+        		m_ll.addView(iv);
+        	}
+        	else if (array.get(i).data_type == 2){ // text
+        		TextView tv = new TextView(getActivity());
+        		tv.setText(array.get(i).data_content);
+        		tv.setTextColor(android.graphics.Color.WHITE);
+        		m_ll.addView(tv);
+        	}
+        }
     }
 
     @Override
@@ -48,14 +74,12 @@ public class DetailsFragment extends Fragment {
             Bundle savedInstanceState) {
     	Log.d("DetailsFragment", "onCreateView");
         super.onCreate(savedInstanceState);
-        
+       
         show_DetailsFragment = true;
         View view = inflater.inflate(R.layout.item_detail, container, false);
-        m_tv = (TextView) view.findViewById(R.id.item_detail_title);
-        m_tv.setText(m_list.get(m_position-1).get(SqlOpenHelper.NEWS_COLUMN_TITLE));
-        m_iv = (ImageView) view.findViewById(R.id.item_detail_image);
-        m_iv.setImageURI(Uri.parse("file:" + (m_list.get(m_position-1).get(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI))));
-		
+        m_ll = (LinearLayout)view.findViewById(R.id.item_detail_container);
+        updateView();
+        
 		ImageView back_image = (ImageView)getActivity().findViewById(R.id.titel_bar_back_image);
 		back_image.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View view) {
@@ -66,8 +90,7 @@ public class DetailsFragment extends Fragment {
 		m_left_image.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View view) {
         		m_position--;
-        		m_tv.setText(m_list.get(m_position-1).get(SqlOpenHelper.NEWS_COLUMN_TITLE));
-        		m_iv.setImageURI(Uri.parse("file:" + (m_list.get(m_position-1).get(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI))));
+        		updateView();
         		ShowHideArrowImage();
         	}
         });
@@ -75,8 +98,7 @@ public class DetailsFragment extends Fragment {
 		m_right_image.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View view) {
         		m_position++;
-        		m_tv.setText(m_list.get(m_position-1).get(SqlOpenHelper.NEWS_COLUMN_TITLE));
-        		m_iv.setImageURI(Uri.parse("file:" + (m_list.get(m_position-1).get(SqlOpenHelper.NEWS_COLUMN_THUMBNAIL_URI))));
+        		updateView();
         		ShowHideArrowImage();
         	}
         });
@@ -86,11 +108,12 @@ public class DetailsFragment extends Fragment {
     
     private void ShowHideArrowImage()
     {
-		if (m_position == 1) 
+    	Log.d("DetailsFragment", "ShowHideArrowImage");
+		if (m_position == 0) 
 			m_left_image.setVisibility(View.GONE);
 		else
 			m_left_image.setVisibility(View.VISIBLE);
-		if (m_position == m_list.size()) 
+		if (m_position == m_list.size()-1) 
 			m_right_image.setVisibility(View.GONE);
 		else
 			m_right_image.setVisibility(View.VISIBLE);
