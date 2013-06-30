@@ -27,6 +27,12 @@ public class SanCoffeeApp extends Application {
 			//return true;
 		}
 		
+		public void setFirstRun(boolean b){
+			SharedPreferences.Editor edit = mPrefs.edit();
+			edit.putBoolean("firstRun", b);
+			edit.commit();
+		}
+		
 		public void setRunned(){
 			SharedPreferences.Editor edit = mPrefs.edit();
 			edit.putBoolean("firstRun", false);
