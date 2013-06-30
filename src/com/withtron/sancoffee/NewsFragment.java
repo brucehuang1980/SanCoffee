@@ -233,7 +233,12 @@ public class NewsFragment extends Fragment {
 	    					String id= Integer.toString(news.data[i].news_id);
 	    					if (mNewsMap.containsKey(id) && mNewsMap.get(id).update_date.equals(news.data[i].update_date))
 	    						continue;
-	    						
+	    					if (mNewsMap.containsKey(id) ){ // remove update item 
+	    					//if (true){
+	    						database.delete(SqlOpenHelper.TABLE_NEWS_DETAIL, SqlOpenHelper.NEWS_DETAIL_COLUMN_NEWS_ID + " = " + id, null);
+	    						database.delete(SqlOpenHelper.TABLE_NEWS, SqlOpenHelper.NEWS_COLUMN_ID + " = " + id, null);
+	    					}
+	    					
 	    					for (int j = 0;j < news.data[i].item.length; j++){
 		        				if (news.data[i].item[j].data_type == 1) {// image
 			        				// save thumbnail to local
@@ -269,12 +274,14 @@ public class NewsFragment extends Fragment {
 	        					values2.put(SqlOpenHelper.NEWS_DETAIL_COLUMN_CONTENT, news.data[i].item[j].data_content);
 	        					values2.put(SqlOpenHelper.NEWS_DETAIL_COLUMN_LINK, news.data[i].item[j].data_link);
 		        				long insertDetailId = database.insert(SqlOpenHelper.TABLE_NEWS_DETAIL, null, values2);
+		        				//Log.d("NewsRequestTask",  "insertDetailId  = " + insertDetailId);
 	        				}
 	        				ContentValues values = new ContentValues();
 	        				values.put(SqlOpenHelper.NEWS_COLUMN_ID, news.data[i].news_id);
 	        				values.put(SqlOpenHelper.NEWS_COLUMN_TITLE, news.data[i].news_title);
 	        				values.put(SqlOpenHelper.NEWS_COLUMN_UPDATE_TIME, news.data[i].update_date);
 	        				long insertId = database.insert(SqlOpenHelper.TABLE_NEWS, null, values);
+	        				//Log.d("NewsRequestTask",  "insertId = " + insertId);
 	    				}
 	    				database.close();
             		}
