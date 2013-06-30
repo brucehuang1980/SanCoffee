@@ -34,9 +34,9 @@ public class ScanFragment extends Fragment {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		Log.d("ScanFragment", "onCreateView");
-		View view = inflater.inflate(R.layout.activity_scan, container, false);
+		View view = inflater.inflate(R.layout.relative_layout, container, false);
 		
-		RelativeLayout rl = (RelativeLayout)view.findViewById(R.id.scan_layout);
+		RelativeLayout rl = (RelativeLayout)view.findViewById(R.id.relative_layout_container);
         DisplayMetrics dm = new DisplayMetrics();   
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm); //先取得螢幕解析度  
         int screenWidth = dm.widthPixels;   //取得螢幕的寬
@@ -92,7 +92,7 @@ public class ScanFragment extends Fragment {
         button_ok.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View view) {
         		FragmentTransaction ft = getFragmentManager().beginTransaction();
-        		ft.replace(R.id.scan_layout, new ScanProductFragment());
+        		ft.replace(R.id.relative_layout_container, new ScanProductFragment());
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.addToBackStack(null);
                 ft.commit();

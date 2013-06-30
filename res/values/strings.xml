@@ -22,6 +22,11 @@
     <string name="scan_not_login">未登錄</string>
     <string name="scan_add_to_my_list">加到我的清單</string>
     <string name="my_tab">My</string>
+    <string name="my_best_drink_date">最適飲用日期</string>
+    <string name="my_beans_introduction">豆種介紹</string>
+    <string name="my_manor_introduction">莊園介紹</string>
+    <string name="my_suggestion">沖煮建議</string>
+    <string name="my_rating">給予評價</string>
     <string name="setup_tab">Setup</string>
     <string name="back">Back</string>
     <string name="account">帳號</string>
