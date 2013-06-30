@@ -1,20 +1,29 @@
 package com.withtron.sancoffee;
 
 
+import java.util.Calendar;
+
 import com.withtron.sancoffee.R;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.DatePicker.OnDateChangedListener;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ScanProductFragment extends Fragment {
+	EditText m_et;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -65,6 +74,30 @@ public class ScanProductFragment extends Fragment {
         tvOpenDate.setTextColor(Color.parseColor("#ffffff"));
         tvOpenDate.setText(R.string.scan_open_date);
         rl.addView(tvOpenDate);
+        
+       
+        m_et = new EditText(getActivity());
+        m_et.setText(R.string.scan_not_login);
+        m_et.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Log.d("ScanProductFragment", "open time edit text onClick");
+				Calendar c = Calendar.getInstance(); 
+				DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+					@Override
+					public void onDateSet(DatePicker view, int year, int month,  int day) {
+						// TODO Auto-generated method stu
+						Log.d("ScanProductFragment", "onDateSet");
+						m_et.setText(Integer.toString(year) + "/" + Integer.toString(month) + "/" + Integer.toString(day));
+					}},  c.get(Calendar.YEAR),  c.get(Calendar.MONTH),  c.get(Calendar.DAY_OF_MONTH));
+				dpd.show();
+			}});
+        params = new RelativeLayout.LayoutParams(200, 100);
+        params.leftMargin = 200; 
+        params.topMargin = 330;
+        m_et.setLayoutParams(params);
+        rl.addView(m_et);
         
         Button btnAddToMyList = new Button(getActivity());
         params = new RelativeLayout.LayoutParams(200, 100);
