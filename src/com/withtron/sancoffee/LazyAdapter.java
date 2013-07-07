@@ -2,6 +2,7 @@ package com.withtron.sancoffee;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.withtron.sancoffee.NewsFragment.NewsData;
@@ -18,11 +19,11 @@ import android.widget.TextView;
 public class LazyAdapter extends BaseAdapter {
     
     private Activity activity;
-    private HashMap<String, NewsData> mData;
+    private LinkedHashMap<String, NewsData> mData;
     private static LayoutInflater inflater=null;
     public ImageLoader imageLoader; 
     
-    public LazyAdapter(Activity a, HashMap<String, NewsData> d) {
+    public LazyAdapter(Activity a, LinkedHashMap<String, NewsData> d) {
         activity = a;
         mData=d;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -50,7 +51,7 @@ public class LazyAdapter extends BaseAdapter {
         //TextView artist = (TextView)vi.findViewById(R.id.artist); // artist name
         //ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image); // thumb image
         
-        HashMap<String, String> item = new HashMap<String, String>();
+        LinkedHashMap<String, String> item = new LinkedHashMap<String, String>();
         //item = data.get(position);
         List keys = new ArrayList(mData.keySet());
         NewsData data = mData.get(keys.get(position));

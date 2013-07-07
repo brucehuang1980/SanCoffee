@@ -2,6 +2,7 @@ package com.withtron.sancoffee;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.withtron.sancoffee.NewsFragment.NewsData;
@@ -28,12 +29,12 @@ public class DetailsFragment extends Fragment {
      * show the text at 'index'.
      */
 	static boolean show_DetailsFragment = false; // ISSUE, why receive user click event after setTransition
-	static HashMap<String, ArrayList<NewsItem>> m_list;
+	static LinkedHashMap<String, ArrayList<NewsItem>> m_list;
 	static int m_position = 0;
 	ImageView m_left_image;
 	ImageView m_right_image;
 	LinearLayout m_ll;
-    public static DetailsFragment newInstance(HashMap<String, ArrayList<NewsItem>> map, int position ) {
+    public static DetailsFragment newInstance(LinkedHashMap<String, ArrayList<NewsItem>> map, int position ) {
     	Log.d("DetailsFragment", "newInstance");
     	
     	m_list = map;

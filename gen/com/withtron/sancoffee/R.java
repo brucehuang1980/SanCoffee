@@ -273,7 +273,6 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f040029;
         public static final int contentPane=0x7f040037;
         public static final int copyright_layout=0x7f04002b;
-        public static final int detail_container=0x7f040039;
         public static final int duration=0x7f040035;
         public static final int forget_password=0x7f04000b;
         public static final int image_left_arrow=0x7f04002f;
@@ -286,25 +285,25 @@ containing a value of this type.
         public static final int list_image=0x7f040032;
         public static final int listview_setup=0x7f040014;
         public static final int login_layout=0x7f040005;
-        public static final int menu_settings=0x7f040044;
+        public static final int menu_settings=0x7f040043;
         public static final int no_image_title=0x7f040036;
         public static final int normal=0x7f040001;
         public static final int picker_subtitle=0x7f040027;
-        public static final int pull_to_refresh_header=0x7f04003a;
-        public static final int pull_to_refresh_image=0x7f04003c;
-        public static final int pull_to_refresh_progress=0x7f04003b;
-        public static final int pull_to_refresh_text=0x7f04003d;
-        public static final int pull_to_refresh_updated_at=0x7f04003e;
+        public static final int pull_to_refresh_header=0x7f040039;
+        public static final int pull_to_refresh_image=0x7f04003b;
+        public static final int pull_to_refresh_progress=0x7f04003a;
+        public static final int pull_to_refresh_text=0x7f04003c;
+        public static final int pull_to_refresh_updated_at=0x7f04003d;
         public static final int realtabcontent=0x01010000;
         public static final int register=0x7f040011;
-        public static final int relative_layout_container=0x7f04003f;
+        public static final int relative_layout_container=0x7f04003e;
         public static final int san_account=0x7f040007;
         public static final int san_login=0x7f040009;
         public static final int san_login_back=0x7f040006;
         public static final int san_login_fb_login=0x7f04000a;
         public static final int san_password=0x7f040008;
         public static final int san_sign_up_back=0x7f04000c;
-        public static final int scan_product_layout=0x7f040040;
+        public static final int scan_product_layout=0x7f04003f;
         public static final int scroller=0x7f040004;
         public static final int search_box=0x7f040026;
         public static final int setup_layout=0x7f040013;
@@ -315,9 +314,9 @@ containing a value of this type.
         public static final int sign_up_password2=0x7f04000f;
         public static final int small=0x7f040000;
         public static final int thumbnail=0x7f040031;
-        public static final int titel_bar_back_image=0x7f040043;
-        public static final int titel_bar_fb_user_name=0x7f040042;
-        public static final int titel_bar_image=0x7f040041;
+        public static final int titel_bar_back_image=0x7f040042;
+        public static final int titel_bar_fb_user_name=0x7f040041;
+        public static final int titel_bar_image=0x7f040040;
         public static final int title=0x7f040033;
     }
     public static final class layout {

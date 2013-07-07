@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -63,16 +64,16 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class NewsFragment extends Fragment {
 	private PullToRefreshListView mPullToRefreshListView;
-	private HashMap<String, NewsData> mNewsMap;
-	private HashMap<String, ArrayList<NewsItem>> mNewsDetailMap;
+	private LinkedHashMap<String, NewsData> mNewsMap;
+	private LinkedHashMap<String, ArrayList<NewsItem>> mNewsDetailMap;
 	private boolean mLoading = false;  // ISSUE, avoid dup source code (parse news and download image)
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		Log.d("NewsFragment", "onCreate");
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		mNewsMap = new HashMap<String, NewsData>();
-		mNewsDetailMap = new HashMap<String, ArrayList<NewsItem>>();
+		mNewsMap = new LinkedHashMap<String, NewsData>();
+		mNewsDetailMap = new LinkedHashMap<String, ArrayList<NewsItem>>();
 	}
 
 	@Override
@@ -146,8 +147,7 @@ public class NewsFragment extends Fragment {
         // Query db
 		SqlOpenHelper helper = new SqlOpenHelper(getActivity());
 		SQLiteDatabase database = helper.getWritableDatabase();    
-        
-		Cursor newsDetailCursor = database.query(SqlOpenHelper.TABLE_NEWS_DETAIL, null, null, null, null, null, null, null);
+		Cursor newsDetailCursor = database.query(SqlOpenHelper.TABLE_NEWS_DETAIL, null, null, null, null, null, SqlOpenHelper.NEWS_DETAIL_COLUMN_NEWS_ID + " DESC", null);
 		newsDetailCursor.moveToFirst();
         if (! newsDetailCursor.isAfterLast()){
         	do{
@@ -169,7 +169,7 @@ public class NewsFragment extends Fragment {
         }
         newsDetailCursor.close();
         
-        Cursor newsCursor = database.query(SqlOpenHelper.TABLE_NEWS, null, null, null, null, null, null, null);
+        Cursor newsCursor = database.query(SqlOpenHelper.TABLE_NEWS, null, null, null, null, null, SqlOpenHelper.NEWS_COLUMN_ID + " DESC", null);
         newsCursor.moveToFirst();
         if (! newsCursor.isAfterLast()){
         	do{
@@ -282,6 +282,34 @@ public class NewsFragment extends Fragment {
 	        				values.put(SqlOpenHelper.NEWS_COLUMN_UPDATE_TIME, news.data[i].update_date);
 	        				long insertId = database.insert(SqlOpenHelper.TABLE_NEWS, null, values);
 	        				//Log.d("NewsRequestTask",  "insertId = " + insertId);
+	    				}
+	    				
+	    		        List keys = new ArrayList(mNewsMap.keySet());
+	    				for(int i =0; i<mNewsMap.size(); i++){ // db
+	    					NewsData dbNewsData = mNewsMap.get(keys.get(i));
+	    					boolean bContains = false;
+	    					for (int j = 0;j < news.data[j].item.length; j++){ // server
+	    						String id= Integer.toString(news.data[j].news_id);
+	    						if (mNewsMap.containsKey(id)){
+	    							bContains = true;
+	    							break;
+	    						}
+	    					}
+	    					//bContains = false;
+	    					if (false == bContains && mNewsDetailMap.containsKey(Integer.toString(dbNewsData.news_id))){
+	    						ArrayList<NewsItem> listNews = mNewsDetailMap.get(Integer.toString(dbNewsData.news_id));
+	    						for (int j=0; j<listNews.size(); j++){
+	    							NewsItem item = listNews.get(j);
+	    							if (item.data_type == 1) {// image
+	    								String filename = "/data/data/com.withtron.sancoffee/files/" + dbNewsData.news_id + "_" + item.data_content.substring( item.data_content.lastIndexOf('/')+1, item.data_content.length());
+	    								File file = new File(filename);
+	    								boolean b = file.delete();
+	    								Log.d("NewsRequestTask", "Delete file: " + filename + ", result = " + b);
+	    							}
+	    						}
+	    						database.delete(SqlOpenHelper.TABLE_NEWS_DETAIL, SqlOpenHelper.NEWS_DETAIL_COLUMN_NEWS_ID + " = " + dbNewsData.news_id, null);
+	    						database.delete(SqlOpenHelper.TABLE_NEWS, SqlOpenHelper.NEWS_COLUMN_ID + " = " + dbNewsData.news_id, null);
+	    					}
 	    				}
 	    				database.close();
             		}
